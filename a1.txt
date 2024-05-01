@@ -1,0 +1,28 @@
+import pandas as pd
+import numpy as np
+
+# Assuming you've downloaded the dataset as titanic.csv
+df = pd.read_csv("train.csv")
+df
+
+# Check for missing values
+missing_values = df.isnull().sum()
+print("Missing Values:")
+print(missing_values)
+
+# Get initial statistics
+description = df.describe()
+print("\nInitial Statistics:")
+print(description)
+
+print("\nDimensions of the DataFrame:")
+print(df.shape)
+
+# Summarize types of variables
+variable_types = df.dtypes
+print("\nTypes of Variables:")
+print(variable_types)
+
+# convert 'Sex' variable from categorical to quantitative using one-hot encoding
+df = pd.get_dummies(df, columns=['Sex'], drop_first=True)
+df
