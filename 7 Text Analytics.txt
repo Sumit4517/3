@@ -1,0 +1,59 @@
+import spacy
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+
+# Sample document
+sample_document = "Text analytics is the process of deriving meaning from text data. It involves tokenization, POS tagging, stop words removal, stemming, and lemmatization."
+
+# Load English language model in spacy
+nlp = spacy.load('en_core_web_sm')
+
+# Tokenization
+doc = nlp(sample_document)
+tokens = [token.text for token in doc]
+
+# POS Tagging
+pos_tags = [(token.text, token.pos_) for token in doc]
+
+# Stop words removal
+stop_words = set(stopwords.words('english'))
+filtered_tokens = [token for token in tokens if token.lower() not in stop_words]
+
+# Stemming
+stemmer = PorterStemmer()
+stemmed_tokens = [stemmer.stem(token) for token in filtered_tokens]
+
+# Lemmatization
+lemmatizer = WordNetLemmatizer()
+lemmatized_tokens = [lemmatizer.lemmatize(token) for token in filtered_tokens]
+
+print("Original Document:", sample_document)
+print("Tokenization:", tokens)
+print("POS Tagging:", pos_tags)
+print("Stop Words Removal:", filtered_tokens)
+print("Stemming:", stemmed_tokens)
+print("Lemmatization:", lemmatized_tokens)
+
+
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+# Create a list of documents
+documents = [
+    "Text analytics is the process of deriving meaning from text data.",
+    "It involves tokenization, POS tagging, stop words removal, stemming, and lemmatization."
+]
+
+# Initialize TfidfVectorizer
+tfidf_vectorizer = TfidfVectorizer()
+
+# Fit and transform the documents
+tfidf_matrix = tfidf_vectorizer.fit_transform(documents)
+
+# Convert the sparse matrix to dense representation
+dense_matrix = tfidf_matrix.toarray()
+
+# Create DataFrame for better visualization (optional)
+import pandas as pd
+df_tfidf = pd.DataFrame(dense_matrix, columns=tfidf_vectorizer.get_feature_names_out())
+print(df_tfidf)

@@ -1,0 +1,70 @@
+# Step 1: Import Libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Step 2: Load the Dataset
+df = pd.read_csv('Iris.csv')
+
+# Step 3: Prepare the Data
+X = df.drop('Species', axis=1)  # Features (excluding the target variable 'Species')
+y = df['Species']  # Target variable
+
+# Step 4: Split the Data into Training and Testing Sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Step 5: Train the Naïve Bayes Model
+model = GaussianNB()
+model.fit(X_train, y_train)
+
+# Step 6: Make Predictions
+y_pred = model.predict(X_test)
+
+# Step 7: Evaluate the Model
+accuracy = accuracy_score(y_test, y_pred)
+conf_matrix = confusion_matrix(y_test, y_pred)
+classification_rep = classification_report(y_test, y_pred)
+
+# Step 8: Display Results
+print(f'Accuracy: {accuracy}')
+print(f'Confusion Matrix:\n{conf_matrix}')
+print(f'Classification Report:\n{classification_rep}')
+
+# Step 6: Make Predictions
+y_pred = model.predict(X_test)
+
+# Step 7: Compute Confusion Matrix and Performance Metrics
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score
+
+# Compute confusion matrix
+conf_matrix = confusion_matrix(y_test, y_pred)
+
+# Calculate True Positives (TP), False Positives (FP), True Negatives (TN), False Negatives (FN)
+TP = conf_matrix[1, 1]
+FP = conf_matrix[0, 1]
+TN = conf_matrix[0, 0]
+FN = conf_matrix[1, 0]
+
+# Calculate Accuracy
+accuracy = accuracy_score(y_test, y_pred)
+
+# Calculate Error Rate
+error_rate = 1 - accuracy
+
+# Calculate Precision
+precision = precision_score(y_test, y_pred, average='weighted')
+
+# Calculate Recall
+recall = recall_score(y_test, y_pred, average='weighted')
+
+# Display the results
+print(f'Confusion Matrix:\n{conf_matrix}')
+print(f'True Positives (TP): {TP}')
+print(f'False Positives (FP): {FP}')
+print(f'True Negatives (TN): {TN}')
+print(f'False Negatives (FN): {FN}')
+print(f'Accuracy: {accuracy}')
+print(f'Error Rate: {error_rate}')
+print(f'Precision: {precision}')
+print(f'Recall: {recall}')

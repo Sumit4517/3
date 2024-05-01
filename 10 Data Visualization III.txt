@@ -1,0 +1,80 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+iris_df = pd.read_csv('Iris.csv')
+
+iris_df.head()
+
+iris_df.shape
+
+iris_df.info
+
+iris_df.describe()
+
+# Plot histograms for each feature
+plt.figure(figsize=(10, 6))  # Set the figure size
+
+# Iterate through each numeric feature and create a histogram
+for idx, feature in enumerate(['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']):
+    plt.subplot(2, 2, idx + 1)  # Create subplots
+    sns.histplot(iris_df[feature], kde=True)  # Plot histogram with KDE curve
+    plt.title(f'Histogram of {feature.capitalize()}')  # Set subplot title
+    plt.xlabel(feature.capitalize())  # Set xlabel for the histogram
+
+plt.tight_layout()  # Adjust layout to prevent overlapping
+plt.show()  # Display the plot
+
+
+# Plot boxplots for each feature
+plt.figure(figsize=(10, 6))  # Set the figure size
+
+# Iterate through each numeric feature and create a boxplot
+for idx, feature in enumerate(['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']):
+    plt.subplot(2, 2, idx + 1)  # Create subplots
+    sns.boxplot(x=iris_df[feature])  # Plot boxplot
+    plt.title(f'Boxplot of {feature.capitalize()}')  # Set subplot title
+    plt.xlabel(feature.capitalize())  # Set xlabel for the boxplot
+
+plt.tight_layout()  # Adjust layout to prevent overlapping
+plt.show()  # Display the plot
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''To compare distributions and identify outliers in the Iris dataset based on the boxplots, you can visually inspect the boxplots and look for any data points 
+that fall significantly outside the whiskers of the boxplots. Outliers are typically defined as
+data points that are significantly higher or lower than the rest of the data and can be seen as individual points beyond the whiskers of the boxplots.
+
+Here's how you can interpret the boxplots and identify potential outliers:
+
+Sepal Length (cm):
+The boxplot for sepal length shows a relatively normal distribution without any clear outliers.
+Sepal Width (cm):
+There are a few data points with sepal widths lower than the lower whisker, indicating potential outliers on the lower end of sepal width.
+Petal Length (cm):
+Petal length appears to have a few outliers on the upper end, as indicated by data points beyond the upper whisker.
+Petal Width (cm):
+Similar to petal length, petal width also shows outliers on the upper end, beyond the upper whisker of the boxplot.
+To summarize:
+
+Sepal width, petal length, and petal width have potential outliers, especially on the upper end.
+Sepal length does not show any clear outliers.
+These observations are based on the visual inspection of the boxplots. You can further analyze and verify these outliers using statistical 
+methods or domain knowledge if needed.'''
+

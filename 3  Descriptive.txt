@@ -1,0 +1,56 @@
+import pandas as pd
+import numpy as np
+
+# Data
+data = {
+    "Name": ["John", "Emma", "Michael", "Sophia", "William",
+             "Olivia", "James", "Ava", "Alexander", "Isabella",
+             "Benjamin", "Mia", "Henry", "Charlotte", "Samuel",
+             "Amelia", "Joseph", "Emily", "Daniel", "Ella"],
+    "Age": [41, 56, 30, 23, 28, 54, 39, 41, 24, 57, 57, 52, 25, 38, 26, 47, 56, 50, 42, 33],
+    "Income": [83540, 40780, 62920, 89350, 54670, 48890, 72600, 40310, 66780, 72140,
+               75900, 64920, 54360, 89640, 38450, 63010, 52390, 95870, 88630, 57120]
+}
+
+# Create DataFrame
+data_frame = pd.DataFrame(data)
+
+data_frame
+
+# Group by age groups (e.g., 20-29, 30-39, 40-49, 50-59)
+bins = [20, 30, 40, 50, 60]
+labels = ["20-29", "30-39", "40-49", "50-59"]
+data_frame['Age Group'] = pd.cut(data_frame['Age'], bins=bins, labels=labels, right=False)
+
+#Calculate summary statistics with observed=False
+summary_stats = data_frame.groupby('Age Group', observed=False)['Income'].agg(['mean', 'median', 'min', 'max', 'std'])
+summary_stats
+
+# Create a list with a numeric value for each response to the categorical variable "Age Group"
+numeric_values = list(range(len('Age Group')))
+numeric_values
+
+# Load the iris dataset
+iris_data = pd.read_csv('Iris.csv')
+
+# Check the column names
+print(iris_data.columns)
+
+iris_data.describe()
+
+iris_data.info()
+
+# Filter data for each species
+setosa_data = iris_data[iris_data['Species'] == 'Iris-setosa']
+versicolor_data = iris_data[iris_data['Species'] == 'Iris-versicolor']
+virginica_data = iris_data[iris_data['Species'] == 'Iris-virginica']
+
+# Display basic statistical details for each species
+print("Statistics for Iris-setosa:")
+print(setosa_data.describe())
+
+print("\nStatistics for Iris-versicolor:")
+print(versicolor_data.describe())
+
+print("\nStatistics for Iris-virginica:")
+print(virginica_data.describe())

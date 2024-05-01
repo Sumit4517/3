@@ -1,0 +1,46 @@
+# Step 1: Import Libraries
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Step 2: Load the Titanic Dataset
+titanic_df = sns.load_dataset('titanic')
+
+# Step 3: Explore the Data and Visualize Patterns
+# Show the first few rows of the dataset
+print(titanic_df.head())
+
+# Visualize the distribution of passengers by class using a count plot
+sns.countplot(x='class', data=titanic_df)
+plt.title('Passenger Distribution by Class')
+plt.show()
+
+# Visualize the survival status of passengers by class using a count plot
+sns.countplot(x='class', hue='survived', data=titanic_df)
+plt.title('Survival Status by Class')
+plt.legend(title='Survived', loc='upper right')
+plt.show()
+
+# Visualize the survival status of passengers by age using a histogram
+plt.figure(figsize=(10, 6))
+sns.histplot(x='age', hue='survived', data=titanic_df, bins=30, kde=True)
+plt.title('Survival Status by Age')
+plt.legend(title='Survived', loc='upper right')
+plt.xlabel('Age')
+plt.ylabel('Count')
+plt.show()
+
+# Visualize the fare distribution by class using a boxplot
+plt.figure(figsize=(10, 6))
+sns.boxplot(x='class', y='fare', data=titanic_df)
+plt.title('Fare Distribution by Class')
+plt.show()
+
+
+# Plot a histogram of ticket prices
+plt.figure(figsize=(10, 6))
+sns.histplot(x='fare', data=titanic_df, bins=30, kde=True)
+plt.title('Distribution of Ticket Prices')
+plt.xlabel('Ticket Price')
+plt.ylabel('Count')
+plt.show()

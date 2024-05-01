@@ -1,0 +1,54 @@
+#importing Libraries
+import pandas as pd
+import numpy as np
+
+#https://www.kaggle.com/datasets/forgetabhi/top-10000-books-good-reads-dataset?resource=download
+data_frame = pd.read_csv('books.csv')
+
+#Getting Head and tail of data
+data_frame.head(2)
+
+data_frame.tail(2)
+
+#getting information of data set like number of entries, columns etc.
+data_frame.info()
+
+#getting statistical information related to data
+data_frame.describe()
+
+#checking for missing values
+data_frame.isnull()
+
+#Summing up the missing vales
+data_frame.isnull().sum()
+
+#Checking out column names and their data types
+data_frame.dtypes
+
+#Checking Dimensions i.e no of rows and columns of dataframe
+dimensions = data_frame.shape
+print("\nDimensions of DataFrame:")
+print("Rows:", dimensions[0])
+print("Columns:", dimensions[1])
+
+
+#Lable encoding converting catagorical data into numerical data
+from sklearn.preprocessing import LabelEncoder
+# Initialize LabelEncoder
+label_encoder = LabelEncoder()
+# Encode the categorical column
+data_frame['num_ratings'] = label_encoder.fit_transform(data_frame['num_ratings'])
+
+data_frame.dtypes
+
+# converting int into float
+data_frame['num_ratings']=data_frame['num_ratings'].astype(float)
+data_frame.dtypes
+
+#converting float into category
+data_frame['average_rating']=data_frame['average_rating'].astype('category')
+data_frame.dtypes
+
+#converting category into float
+data_frame['average_rating']=data_frame['average_rating'].astype(float)
+data_frame.dtypes

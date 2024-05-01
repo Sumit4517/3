@@ -1,0 +1,37 @@
+# Import necessary libraries
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load the Titanic dataset
+titanic_df = sns.load_dataset('titanic')
+
+# Plot a box plot for age distribution with respect to gender and survival status
+plt.figure(figsize=(10, 6))
+sns.boxplot(x='sex', y='age', hue='survived', data=titanic_df)
+plt.title('Age Distribution by Gender and Survival Status')
+plt.xlabel('Gender')
+plt.ylabel('Age')
+plt.legend(title='Survived', loc='upper right')
+plt.show()
+
+
+
+'''From the box plot that shows the age distribution with respect to gender and survival status in the Titanic dataset, we can make several observations:
+
+Age Distribution by Gender:
+The median age for both males and females appears to be similar, with slightly more variability in the age distribution for males.
+The interquartile range (IQR) for females is slightly smaller than that for males, indicating that the age distribution for females is more concentrated around the median.
+
+Survival Status:
+There are outliers in both male and female age distributions for both survived and not survived categories, especially among males who did not survive.
+The upper quartile (75th percentile) of age for females who survived is higher than for females who did not survive, suggesting that older females were more likely to survive.
+For males, the age distribution of those who survived and those who did not survive is relatively similar, with a slightly higher median age among those who survived.
+
+Overall Observations:
+There is no significant difference in the median age between males and females across survival categories.
+Older passengers, especially older females, had a higher chance of survival.
+There is more variability in age among males, and younger males had a higher likelihood of not surviving compared to younger females.
+These observations provide insights into the relationship between age, gender, and survival status among Titanic passengers. However, it's essential to note that this 
+analysis is based on the available dataset and may not capture all factors influencing survival rates during the Titanic disaster. 
+Further analysis and consideration of other variables could provide a more comprehensive understanding of the dynamics at play.
+'''
